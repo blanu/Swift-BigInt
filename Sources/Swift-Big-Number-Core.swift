@@ -521,7 +521,7 @@ public struct BInt:
 
 	///	Returns BInt's value as an integer. Conversion only works when self has only one limb
 	/// that's within the range of the type "Int".
-	func asInt() -> Int?
+	public func asInt() -> Int?
 	{
 		if self.limbs.count != 1 { return nil }
 
