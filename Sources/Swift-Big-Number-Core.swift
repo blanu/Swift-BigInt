@@ -1966,7 +1966,7 @@ fileprivate extension Array where Element == Limb
 //
 //
 //
-internal class BIntMath
+public class BIntMath
 {
 	/// Returns true iff (2 ** exp) - 1 is a mersenne prime.
 	static func isMersenne(_ exp: Int) -> Bool
