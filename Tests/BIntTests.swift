@@ -96,7 +96,8 @@ class BIntTests: XCTestCase {
 		XCTAssert(BInt("4",radix:5)! >= 1.0)
 		XCTAssert(BInt("923492349",radix:32)! == 9967689075849)
 	}
-	
+
+    #if os(macOS)
 	func testPerformanceStringInit() {
 		self.measure {
 			for _ in (0...15000) {
@@ -112,6 +113,7 @@ class BIntTests: XCTestCase {
 			}
 		}
 	}
+    #endif
     
     /** An issue was reported where a hex string was not being converted to a decimal. This test case checks that. */
     func testIssue58() throws {

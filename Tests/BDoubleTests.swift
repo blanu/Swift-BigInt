@@ -13,7 +13,8 @@ class BDoubleTests : XCTestCase {
 		// Put teardown code here. This method is called after the invocation of each test method in the class.
 		super.tearDown()
 	}
-	
+
+    #if os(macOS)
 	func testInitialization() {
 		// This is an example of a functional test case.
 		// Use XCTAssert and related functions to verify your tests produce the correct results.
@@ -83,7 +84,7 @@ class BDoubleTests : XCTestCase {
 			XCTAssert(BDouble(rn2) != BDouble(rn))
 		}
 	}
-	
+
 	func testPow() {
 		XCTAssertEqual((BDouble("27")!**3), BDouble("19683")!)
 		XCTAssertEqual(pow(BDouble("27")!,BInt("3")!), BDouble("19683")!)
@@ -110,7 +111,8 @@ class BDoubleTests : XCTestCase {
 			XCTAssertEqual(pow(BDouble(rn), 1), BDouble(rn))
 		}
 	}
-	
+    #endif
+
 	func test_mod() {
 		let answers = [
 			("5.0", "2.6", "2.4"),
@@ -479,7 +481,8 @@ class BDoubleTests : XCTestCase {
 		XCTAssertEqual(-BDouble(6.54), BDouble(-6.54))
 		testPow()
 	}
-	
+
+    #if os(macOS)
 	func testPerformanceStringInit() {
 		self.measure {
 			for _ in (0...1000) {
@@ -497,7 +500,7 @@ class BDoubleTests : XCTestCase {
 			}
 		}
 	}
-	
+
 	func testCodable() {
 		for i in 0..<50 {
 			let one = BDouble(i)
@@ -517,4 +520,5 @@ class BDoubleTests : XCTestCase {
 			XCTAssertEqual(rand, my_rand)
 		}
 	}
+    #endif
 }

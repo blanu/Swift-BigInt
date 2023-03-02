@@ -2102,6 +2102,7 @@ public class BIntMath
 		return BInt(n).factorial() / (BInt(k).factorial() * BInt(n - k).factorial())
 	}
 
+    #if os(macOS)
 	static public func randomBInt(bits n: Int) -> BInt
 	{
 		let limbs = n >> 6
@@ -2139,6 +2140,7 @@ public class BIntMath
 		return BInt(limbs: res)
 	}
 	let random = randomBInt
+    #endif
 
 	func isPrime(_ n: BInt) -> Bool
 	{
