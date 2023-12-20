@@ -1,22 +1,28 @@
-// swift-tools-version:4.2
+// swift-tools-version:5.9
 import PackageDescription
 
 let package = Package(
     name: "BigNumber",
+    platforms: [.macOS(.v14)],
     products: [
         .library(
             name: "BigNumber",
             targets: ["BigNumber"]),
     ],
-    dependencies: [],
+    dependencies: [
+        .package(url: "https://github.com/OperatorFoundation/Datable", branch: "main"),
+    ],
     targets: [
         .target(
             name: "BigNumber",
-            dependencies: [],
+            dependencies: [
+                "Datable",
+            ],
             path: "Sources"),
         .testTarget(
             name: "BigNumberTests",
             dependencies: ["BigNumber"],
             path: "Tests"),
-    ]
+    ],
+    swiftLanguageVersions: [.v5]
 )
