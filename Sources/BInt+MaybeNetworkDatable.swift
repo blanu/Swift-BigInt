@@ -1,5 +1,5 @@
 //
-//  BInt+varint.swift
+//  BInt+MaybeNetworkDatable.swift
 //
 //
 //  Created by Dr. Brandon Wiley on 12/19/23.
@@ -9,21 +9,14 @@ import Foundation
 
 import Datable
 
-extension BInt
+extension BInt: MaybeNetworkDatable
 {
-    public init?(varint: Data)
+    public init?(maybeNetworkData: Data)
     {
-        var data = varint
+        var data = maybeNetworkData
         var limbs: [UInt64] = []
 
-        guard let firstByte = data.first else
-        {
-            return nil
-        }
-        data = data.dropFirst()
-
-        let count = Int(firstByte)
-        for _ in 0..<count
+        while data.count > 0
         {
             guard data.count >= 4 else
             {
@@ -41,25 +34,12 @@ extension BInt
             limbs.append(limb)
         }
 
-        guard data.isEmpty else
-        {
-            return nil
-        }
-
         self.init(limbs: limbs)
     }
 
-    public var varint: Data?
+    public var maybeNetworkData: Data?
     {
         var result: Data = Data()
-
-        let count = self.limbs.count
-        guard let countByte = UInt8(count).maybeNetworkData else
-        {
-            return nil
-        }
-
-        result.append(countByte)
 
         for limb in self.limbs
         {
