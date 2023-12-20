@@ -49,24 +49,18 @@ extension BInt
         self.init(limbs: limbs)
     }
 
-    public var varint: Data?
+    public var varint: Data
     {
         var result: Data = Data()
 
         let count = self.limbs.count
-        guard let countByte = UInt8(count).maybeNetworkData else
-        {
-            return nil
-        }
+        let countByte = UInt8(count).maybeNetworkData!
 
         result.append(countByte)
 
         for limb in self.limbs
         {
-            guard let limbData = limb.maybeNetworkData else
-            {
-                return nil
-            }
+            let limbData = limb.maybeNetworkData!
 
             result.append(limbData)
         }
