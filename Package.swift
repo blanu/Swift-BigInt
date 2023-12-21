@@ -11,6 +11,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/OperatorFoundation/Datable", branch: "main"),
+        .package(url: "https://github.com/OperatorFoundation/SwiftHexTools", branch: "main"),
     ],
     targets: [
         .target(
@@ -21,7 +22,10 @@ let package = Package(
             path: "Sources"),
         .testTarget(
             name: "BigNumberTests",
-            dependencies: ["BigNumber"],
+            dependencies: [
+                "BigNumber",
+                "SwiftHexTools",
+            ],
             path: "Tests"),
     ],
     swiftLanguageVersions: [.v5]

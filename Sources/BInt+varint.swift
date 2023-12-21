@@ -51,19 +51,37 @@ extension BInt
 
     public var varint: Data
     {
+        if self.isZero()
+        {
+            return Data(array: [0x00])
+        }
+
         var result: Data = Data()
 
-        let count = self.limbs.count
-        let countByte = UInt8(count).maybeNetworkData!
+        var count = self.limbs.count * 8
 
-        result.append(countByte)
-
+        var limbData: Data = Data()
         for limb in self.limbs
         {
-            let limbData = limb.maybeNetworkData!
-
-            result.append(limbData)
+            limbData.append(limb.maybeNetworkData!)
         }
+
+        while true
+        {
+            if let first = limbData.first, first == 0
+            {
+                limbData = limbData.dropFirst()
+                count -= 1
+            }
+            else
+            {
+                break
+            }
+        }
+
+        let countByte = UInt8(count).maybeNetworkData!
+        result.append(countByte)
+        result.append(limbData)
 
         return result
     }

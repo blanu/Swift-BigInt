@@ -9,6 +9,8 @@
 import XCTest
 @testable import BigNumber
 
+import SwiftHexTools
+
 class BIntTests: XCTestCase {
     
     override func setUp() {
@@ -137,5 +139,20 @@ class BIntTests: XCTestCase {
         XCTAssertEqual(y, 11)
         XCTAssertEqual(y, BInt("0xb", radix: 16))
         XCTAssertEqual(y, BInt("0x0b", radix: 16))
+    }
+
+    func testVarint()
+    {
+        let t0 = BInt(0)
+        print("0: \(t0.varint.hex)")
+
+        let t1 = BInt(1)
+        print("1: \(t1.varint.hex)")
+
+        let t256 = BInt(256)
+        print("1: \(t256.varint.hex)")
+
+        let t256_256 = BInt(256 * 256)
+        print("1: \(t256_256.varint.hex)")
     }
 }
