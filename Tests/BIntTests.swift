@@ -141,7 +141,7 @@ class BIntTests: XCTestCase {
         XCTAssertEqual(y, BInt("0x0b", radix: 16))
     }
 
-    func testVarint()
+    func testVarintEncode()
     {
         let t0 = BInt(0)
         print("0: \(t0.varint.hex)")
@@ -150,9 +150,36 @@ class BIntTests: XCTestCase {
         print("1: \(t1.varint.hex)")
 
         let t256 = BInt(256)
-        print("1: \(t256.varint.hex)")
+        print("256: \(t256.varint.hex)")
 
         let t256_256 = BInt(256 * 256)
-        print("1: \(t256_256.varint.hex)")
+        print("256*256: \(t256_256.varint.hex)")
+    }
+
+    func testVarintEncodeDecode()
+    {
+        let t0a = BInt(0)
+        let t0bytes = t0a.varint
+        let t0b = BInt(varint: t0bytes)!
+        print(t0b)
+        XCTAssertEqual(t0a, t0b)
+
+        let t1a = BInt(1)
+        let t1bytes = t1a.varint
+        let t1b = BInt(varint: t1bytes)!
+        print(t1b)
+        XCTAssertEqual(t1a, t1b)
+
+        let t256a = BInt(256)
+        let t256bytes = t256a.varint
+        let t256b = BInt(varint: t256bytes)!
+        print(t256b)
+        XCTAssertEqual(t256a, t256b)
+
+        let t256_256a = BInt(256 * 256)
+        let t256_256bytes = t256_256a.varint
+        let t256_256b = BInt(varint: t256_256bytes)!
+        print(t256_256b)
+        XCTAssertEqual(t256_256a, t256_256b)
     }
 }

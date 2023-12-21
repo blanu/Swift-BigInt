@@ -23,15 +23,28 @@ extension BInt
         data = data.dropFirst()
 
         let count = Int(firstByte)
-        for _ in 0..<count
+        let extraBytes = 8 - (count % 8)
+
+        guard count > 0 else
         {
-            guard data.count >= 4 else
+            self.init(0)
+            return
+        }
+
+        let padding = Data(repeating: 0, count: extraBytes)
+        data = padding + data
+        
+        let words = data.count / 8
+
+        for _ in 0..<words
+        {
+            guard data.count >= 8 else
             {
                 return nil
             }
 
-            let chunk = data[0..<4]
-            data = data[4...]
+            let chunk = Data(data[0..<8])
+            data = Data(data[8...])
 
             guard let limb = chunk.maybeNetworkUint64 else
             {
