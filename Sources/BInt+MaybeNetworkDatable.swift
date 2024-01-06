@@ -23,8 +23,8 @@ extension BInt: MaybeNetworkDatable
                 return nil
             }
 
-            let chunk = data[0..<4]
-            data = data[4...]
+            let chunk = Data(data[0..<4])
+            data = Data(data[4...])
 
             guard let limb = chunk.maybeNetworkUint64 else
             {
