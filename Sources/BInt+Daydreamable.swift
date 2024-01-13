@@ -7,6 +7,8 @@
 
 import Foundation
 
+import Daydream
+
 extension BInt: Daydreamable
 {
     public var daydream: Data
