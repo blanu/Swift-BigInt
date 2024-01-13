@@ -11,6 +11,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/OperatorFoundation/Datable", branch: "main"),
+        .package(url: "https://github.com/blanu/Daydream", branch: "main"),
         .package(url: "https://github.com/OperatorFoundation/SwiftHexTools", branch: "main"),
     ],
     targets: [
@@ -18,6 +19,7 @@ let package = Package(
             name: "BigNumber",
             dependencies: [
                 "Datable",
+                "Daydream",
             ],
             path: "Sources"),
         .testTarget(
