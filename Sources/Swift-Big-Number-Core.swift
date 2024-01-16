@@ -185,13 +185,13 @@ public struct BInt:
 
 	/// Stores the sign of the number represented by the BInt. "true" means that the number is
 	/// less than zero, "false" means it's more than or equal to zero.
-	internal var sign  = false
+	public var sign  = false
 	/// Stores the absolute value of the number represented by the BInt. Each element represents
 	/// a "digit" of the number in base 2^64 in an acending order, where the first element is
 	/// the least significant "digit". This representations is the most efficient one for
 	/// computations, however it also means that the number is stored in a non-human-readable
 	/// fashion. To make it readable as a decimal number, BInt offers the required functions.
-	internal var limbs = Limbs()
+	public var limbs = Limbs()
 
 	// Required by the protocol "Numeric".
 	public typealias Magnitude = BInt
@@ -273,14 +273,14 @@ public struct BInt:
 
 	///	Root initializer for all other initializers. Because no sign is provided, the new
 	///	instance is positive by definition.
-	internal init(limbs: Limbs)
+	public init(limbs: Limbs)
 	{
 		precondition(limbs != [], "BInt can't be initialized with limbs == []")
 		self.limbs = limbs
 	}
 
 	/// Create an instance initialized with a sign and a limbs array.
-	internal init(sign: Bool, limbs: Limbs)
+	public init(sign: Bool, limbs: Limbs)
 	{
 		self.init(limbs: limbs)
 		self.sign = sign
@@ -575,7 +575,7 @@ public struct BInt:
 
 	func isPositive() -> Bool { return !self.sign }
 	func isNegative() -> Bool { return  self.sign }
-	func isZero()     -> Bool { return self.limbs[0] == 0 && self.limbs.count == 1 }
+	public func isZero()     -> Bool { return self.limbs[0] == 0 && self.limbs.count == 1 }
 	func isNotZero()  -> Bool { return self.limbs[0] != 0 || self.limbs.count >  1 }
 	func isOdd()      -> Bool { return self.limbs[0] & 1 == 1 }
 	func isEven()     -> Bool { return self.limbs[0] & 1 == 0 }
