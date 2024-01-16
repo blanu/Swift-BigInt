@@ -10,6 +10,7 @@ import XCTest
 @testable import BigNumber
 
 import SwiftHexTools
+import TransmissionData
 
 class BIntTests: XCTestCase {
     
