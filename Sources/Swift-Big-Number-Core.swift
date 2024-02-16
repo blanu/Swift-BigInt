@@ -314,6 +314,11 @@ public struct BInt:
 		self.init(limbs: [Limb(n)])
 	}
 
+    public init(_ n: UInt64)
+    {
+        self.init(limbs: [Limb(n)])
+    }
+
 	/// Create an instance initialized to a string with the value of mathematical numerical
 	/// system of the specified radix (base).
 	///
